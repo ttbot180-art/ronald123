@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Lengkap</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        overflow: hidden;
+        color: white;
+    }
+
+    /* Background video */
+    #bg-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        filter: brightness(50%);
+    }
+
+    /* MENU ATAS */
+    nav {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 20px;
+        background: rgba(0,0,0,0.5);
+        padding: 10px 25px;
+        border-radius: 25px;
+        z-index: 1000;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* Isi halaman */
+    .page {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 500px;
+        background: rgba(0,0,0,0.4);
+        padding: 20px;
+        border-radius: 20px;
+        backdrop-filter: blur(4px);
+        text-align: center;
+    }
+
+    .active {
+        display: block;
+    }
+
+    /* Tombol sosmed */
+    .sosmed a {
+        display: block;
+        margin: 10px 0;
+        padding: 12px;
+        background: rgba(255,255,255,0.2);
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 18px;
+    }
+
+    /* GAME Tic Tac Toe */
+    .board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        margin-top: 15px;
+    }
+
+    .cell {
+        background: rgba(255,255,255,0.2);
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    #restartBtn {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: rgba(255,255,255,0.2);
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- Background video -->
+<video autoplay muted loop id="bg-video">
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+<!-- MENU ATAS -->
+<nav>
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('game')">Game</a>
+    <a onclick="showPage('profil')">Profil</a>
+    <a onclick="showPage('contact')">Contact</a>
+    <a href="index.htmll.html">Logout</a>
+</nav>
+
+<!-- ================== HALAMAN HOME ================== -->
+<div id="home" class="page active">
+    <h2>👋 Selamat Datang!</h2>
+    <p>Ini adalah dashboard buatan kamu.</p>
+    <p>Silahkan pilih menu di atas untuk melihat fitur lainnya.</p>
+
+    <!-- Musik autoplay hanya muncul di halaman HOME -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<!-- ================== HALAMAN GAME ================== -->
+<div id="game" class="page">
+    <h2>🎮 Tic Tac Toe</h2>
+
+    <div class="board" id="board">
+        <div class="cell" onclick="clickCell(this)"></div>
+        <div class="cell" onclick="clickCell(this)"></div>
+        <div class="cell" onclick="clickCell(this)"></div>
+        <div class="cell" onclick="clickCell(this)"></div>
+        <div class="cell" onclick="clickCell(this)"></div>
+        <div class="cell" onclick="clickCell(this)"></div>
+        <div class="cell" onclick="clickCell(this)"></div>
+        <div class="cell" onclick="clickCell(this)"></div>
+        <div class="cell" onclick="clickCell(this)"></div>
+    </div>
+
+    <button id="restartBtn" onclick="restartGame()">Restart Game</button>
+</div>
+
+<!-- ================== HALAMAN PROFIL ================== -->
+<div id="profil" class="page">
+    <h2>👤 Profil Kamu</h2>
+    <p>Nama: (isi sendiri)</p>
+    <p>Umur: (isi sendiri)</p>
+    <p>Hobi: (isi sendiri)</p>
+    <p>Cita-cita: (isi sendiri)</p>
+</div>
+
+<!-- ================== HALAMAN CONTACT ================== -->
+<div id="contact" class="page">
+    <h2>📱 Media Sosial Kamu</h2>
+
+    <div class="sosmed">
+        <a href="https://instagram.com">Instagram</a>
+        <a href="https://wa.me">WhatsApp</a>
+        <a href="https://tiktok.com">TikTok</a>
+    </div>
+</div>
+
+<script>
+
+    /* Navigasi halaman */
+    function showPage(page) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(page).classList.add('active');
+
+        // Musik otomatis hanya berjalan di HOME
+        let music = document.getElementById("bgMusic");
+        if (page === "home") {
+            music.play();
+        } else {
+            music.pause();
+        }
+    }
+
+    // TIC TAC TOE
+    let player = "X";
+
+    function clickCell(cell) {
+        if (cell.innerHTML === "") {
+            cell.innerHTML = player;
+            player = (player === "X") ? "O" : "X";
+        }
+    }
+
+    function restartGame() {
+        document.querySelectorAll(".cell").forEach(c => c.innerHTML = "");
+        player = "X";
+    }
+
+</script>
+
+</body>
+</html>
+      
