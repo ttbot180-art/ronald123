@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Website Statis</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://i.ibb.co/2qkXHhV/demonslayerbg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }.login-container {
+        width: 350px;
+        background: rgba(0,0,0,0.3);
+        border: 2px solid rgba(0,150,255,0.8);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 0 25px rgba(0,150,255,0.9), 0 0 45px rgba(0,150,255,0.5);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    }
+    }
+    }
+
+    .login-container h2 {
+        color: #ff3b3b;
+        margin-bottom: 20px;
+        font-size: 28px;
+        text-shadow: 0 0 10px #ff0000;
+    }
+
+    .input-box {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .input-box input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        background: rgba(0,120,255,0.8);
+        color: #fff;
+    }
+
+    .btn-login {
+        margin-top: 10px;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        background: linear-gradient(90deg, #008CFF, #005FCC);
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-login:hover {
+        background: #4f49cc;
+    }
+
+    .footer-text {
+        color: #ddd;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .footer-text a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        /* Animasi efek air Tanjiro */
+    .water-effect {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://i.ibb.co/WKpC9pJ/water-breathing.png') center/cover no-repeat;
+        opacity: 0.45;
+        animation: wave 4s infinite ease-in-out;
+        pointer-events: none;
+    }
+
+    @keyframes wave {
+        0% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.05) rotate(1deg); }
+        100% { transform: scale(1) rotate(0deg); }
+    }
+
+</style>
+</head>
+<body><div class="login-container">
+    <div class="water-effect"></div>
+    <h2>Login</h2>
+
+    <form action="dashboard.html">
+        <div class="input-box">
+            <input type="ronald" placeholder="username" required>
+        </div>
+        <div class="input-box">
+            <input type="12345" placeholder="password" required>
+        </div>
+        <button class="btn-login" type="submit">Masuk</button>
+    </form>
+
+    <p class="footer-text">Belum punya akun? <a href="#">Daftar</a></p>
+</div>
+
+</body>
+</html>
